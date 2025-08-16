@@ -41,7 +41,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readFileEmpty_Ok() {
+    void readFileEmpty_NotOk() {
         List<String> actual = fileReader.read(emptyFile);
         List<String> expected = List.of("type,fruit,quantity");
         assertEquals(expected, actual);
