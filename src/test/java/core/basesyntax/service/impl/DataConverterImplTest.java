@@ -18,7 +18,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void lineLength_NotOk() {
+    void convertNotValidReport_NotOk() {
         List<String> actual = List.of("fruit,quantity", "s,banana");
         assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(actual);
@@ -38,7 +38,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void negativeQuantity_NotOk() {
+    void convertNegativeQuantity_NotOk() {
         List<String> actual = List.of("type,fruit,quantity", "s,banana,-50");
         assertThrows(IllegalArgumentException.class, () -> {
             dataConverter.convertToTransaction(actual);

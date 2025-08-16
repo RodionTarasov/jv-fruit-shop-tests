@@ -1,27 +1,49 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.FileReader;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private static final String INPUT_FILE_PATH = "src/test/resources/reportToRead.csv";
-    private FileReader fileReader = new FileReaderImpl();
+    private static String inputFilePath;
+    private static String emptyFile;
+    private FileReader fileReader;
+
+    @BeforeAll
+    static void beforeAll() {
+        inputFilePath = "src/test/resources/reportToRead.csv";
+        emptyFile = "src/test/resources/emptyFile.csv";
+    }
+
+    @BeforeEach
+    void setUp() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
-    void addString_Ok() {
-        List<String> actual = fileReader.read(INPUT_FILE_PATH);
+    void readFile_Ok() {
+        List<String> actual = fileReader.read(inputFilePath);
         assertTrue(actual.contains("b,banana,20"));
         assertTrue(actual.contains("b,apple,100"));
     }
 
     @Test
-    void invalidFilePath_NotOk() {
+    void readInvalidFilePath_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             fileReader.read("invalid/path/reportToRead.csv");
         });
+    }
+
+    @Test
+    void readFileEmpty_Ok() {
+        List<String> actual = fileReader.read(emptyFile);
+        List<String> expected = List.of("type,fruit,quantity");
+        assertEquals(expected, actual);
     }
 }

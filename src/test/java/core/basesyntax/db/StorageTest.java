@@ -4,31 +4,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class StorageTest {
 
-    @BeforeEach
-    void setUp() {
-        Storage.fruitStorage.clear();
-    }
-
     @Test
-    void generate_Ok() {
+    void storageGenerate_Ok() {
         Storage.fruitStorage.put("banana", 20);
         assertEquals(20, Storage.fruitStorage.get("banana"));
     }
 
     @Test
-    void updateFruitQuantity() {
+    void storageUpdateFruitQuantity() {
         Storage.fruitStorage.put("apple", 15);
         Storage.fruitStorage.put("apple", 20);
         assertEquals(20, Storage.fruitStorage.get("apple"));
     }
 
     @Test
-    void removeFruit_Ok() {
+    void storageRemoveFruit_Ok() {
         Storage.fruitStorage.put("apple", 20);
         Storage.fruitStorage.remove("apple");
         assertFalse(Storage.fruitStorage.containsKey("apple"));
@@ -40,10 +35,15 @@ class StorageTest {
     }
 
     @Test
-    void multipleFruits_Ok() {
+    void storageMultipleFruits_Ok() {
         Storage.fruitStorage.put("apple", 20);
         Storage.fruitStorage.put("banana", 15);
         Storage.fruitStorage.put("cherry", 25);
         assertEquals(3, Storage.fruitStorage.size());
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitStorage.clear();
     }
 }

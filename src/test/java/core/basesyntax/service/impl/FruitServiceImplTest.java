@@ -38,7 +38,7 @@ class FruitServiceImplTest {
     }
 
     @Test
-    void validData_Ok() {
+    void validReport_Ok() {
         fruitTransactions.add(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         fruitTransactions.add(
@@ -53,7 +53,7 @@ class FruitServiceImplTest {
     }
 
     @Test
-    void negativeQuantity_NotOk() {
+    void processNegativeQuantity_NotOk() {
         fruitTransactions.add(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         fruitTransactions.add(

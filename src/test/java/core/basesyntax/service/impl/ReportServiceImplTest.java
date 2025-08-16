@@ -17,14 +17,14 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void emptyReport_Ok() {
+    void reportServiceEmpty_Ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportService.generateReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    void oneFruit_Ok() {
+    void reportServiceOneFruit_Ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,10" + System.lineSeparator();
         Storage.fruitStorage.put("apple", 10);
